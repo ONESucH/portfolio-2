@@ -1,0 +1,335 @@
+/** Шрифты **/
+.font-face(@family, @filename: @family, @weight: normal, @style: normal){
+  @font-face{
+    font-family: "@{family}";
+    src:url('fonts/@{filename}.eot');
+    src:url('fonts/@{filename}.eot?#iefix') format('embedded-opentype'),
+    url('fonts/@{filename}.woff') format('woff'),
+    url('fonts/@{filename}.ttf') format('truetype'),
+    url('fonts/@{filename}.svg#@{filename}') format('svg');
+    font-weight: @weight;
+    font-style: @style;
+  }
+}
+@family: 'Roboto'; //имя шрифта (обязательно).
+@filename: RobotoRegular; //название шрифта, так же используется в качестве id для шрифта в формате svg (обязательно, по умолчанию используется имя шрифта).
+@weight: normal;
+@style: normal;
+.font-face('RobotoRegular');
+
+/** Стили **/
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  text-decoration: none;
+  font-family: @family;
+}
+
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  min-width: 410px;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 4px 8%;
+  ul {
+    display: flex;
+    flex-grow: 11;
+    align-self: center;
+    justify-content: flex-end;
+    width: 220px;
+    box-sizing: border-box;
+  }
+  li {
+    padding: 10px 15px;
+    list-style: none;
+    cursor: pointer;
+    margin: 0 5px;
+    border-radius: 10px;
+    &:hover {
+      background: #e75200;
+    }
+  }
+  a {
+    color: white;
+  }
+  img {
+    width: 60px;
+    height: 55px;
+  }
+  span {
+    display: flex;
+    background: #000;
+  }
+  button {
+    overflow: hidden;
+    background: orange;
+    border: none;
+    margin-right: 5px;
+    cursor: pointer;
+    align-self: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    &:hover {
+      background: #e75200;
+    }
+  }
+}
+
+#one, #two, #three {
+  width: 20px;
+  margin: 2px auto;
+  height: 3px;
+}
+
+.block-on-off-value {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  align-self: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid orange;
+  align-items: center;
+  margin: auto 5px auto auto;
+  border-radius: 100%;
+  &:hover {
+    border: 1px solid orangered;
+  }
+  span:nth-child(1) {
+    background: red;
+  }
+  span:nth-child(2) {
+    background: #5a94ff;
+  }
+  span:nth-child(3) {
+    background: #3eff54;
+  }
+  span:nth-child(4) {
+    background: orange;
+  }
+  span:nth-child(5) {
+    background: #904eff;
+  }
+  span {
+    width: 3px;
+    height: 10px;
+    border-radius: 20px;
+    margin: auto 2px;
+  }
+}
+
+.content {
+  display: flex;
+  align-items: stretch;
+  padding-top: 60px;
+  min-width: 410px;
+}
+
+.left-block {
+  justify-content: center;
+}
+
+.right-block {
+  display: none;
+  align-self: flex-start;
+}
+
+.section-1, .section-2, .section-3, .section-4 {
+  border-bottom: 30px solid rgba(0, 0, 0, 0.70);
+  color: #f9f9f9;
+  text-align: center;
+  padding: 0 4%;
+}
+.section-2, .section-3, .section-4 {
+  border-top: 30px solid rgba(0, 0, 0, 0.70);
+  &:before {
+    content: '';
+    position: relative;
+    display: block;
+    background: orange;
+    margin: auto;
+    top: -35px;
+    width: 150px;
+    height: 8px;
+    border-radius: 30px;
+  }
+}
+
+.section-1 {
+  align-self: center;
+  flex-grow: 1;
+  z-index: 1;
+  border-bottom: 5vh solid rgba(0, 0, 0, 0.70);
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: -1;
+    height: 60px;
+    background: rgba(0, 0, 0, 10);
+  }
+  h1 {
+    font-size: 42px;
+    padding: 30vh 0 25px;
+    color: orange;
+  }
+  i {
+    margin-left: 10px;
+    vertical-align: baseline;
+  }
+  p {
+    font-size: 20px;
+    padding-bottom: 40vh;
+  }
+  span {
+    display: block;
+    padding-top: 25px;
+    font-size: 24px;
+    color: orange;
+  }
+}
+
+.section-2 {
+  align-self: center;
+  flex-grow: 1;
+  z-index: 1;
+  ul {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: wrap row;
+    flex-basis: auto;
+  }
+  li {
+    color: black;
+    width: 300px;
+    height: auto;
+    padding: 0 10px;
+    text-align: center;
+    margin: 10px auto;
+    list-style: none;
+    font-style: oblique;
+    box-shadow: inset 0 0 10px orange;
+  }
+  img {
+    width: 100%;
+    height: auto;
+    margin: auto;
+  }
+  h3 {
+    padding: 15px 0;
+  }
+  p {
+    padding: 15px 0;
+  }
+}
+
+.fixed-block {
+  display: initial;
+  position: fixed;
+  overflow: hidden;
+  text-align: center;
+  min-height: 100vh;
+  background: rgba(206, 206, 206, 0.6);
+  flex-grow: 1;
+  h2 {
+    text-align: center;
+    padding: 5px 10px;
+  }
+  & input, textarea {
+    width: 80%;
+    color: rgb(0, 0, 0);
+    resize: none;
+    text-shadow: rgba(0, 127, 81, 0.91);
+    margin: 10px auto;
+    padding: 10px 15px;
+    border: 1px solid rgb(0, 127, 81);
+    outline: none;
+    border-radius: 6px;
+  }
+  button {
+    width: 200px;
+    color: rgb(0, 0, 0);
+    text-shadow: rgba(0, 127, 81, 0.91);
+    margin: 10px auto;
+    padding: 10px 15px;
+    border: 1px solid rgb(0, 127, 81);
+    border-radius: 6px;
+    cursor: pointer;
+  }
+}
+
+.subscribe {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.4);
+  a {
+    display: inline-block;
+    margin: 8px auto;
+    vertical-align: middle;
+  }
+  i {
+    font-size: 24px;
+    color: #000;
+    margin: auto 10px;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  min-width: 410px;
+}
+
+@keyframes borderColor {
+  20% {
+    border: 1px solid red;
+  }
+  40% {
+    border: 1px solid #5a94ff;
+  }
+  60% {
+    border: 1px solid #3eff54;
+  }
+  80% {
+    border: 1px solid orange;
+  }
+  100% {
+    border: 1px solid #904eff;
+  }
+}
+
+/** Анимация **/
+
+@keyframes oneAnimate {
+  50% {
+    height: 15px;
+  }
+  100% {
+    height: 10px;
+  }
+}
+
+@keyframes twoAnimate {
+  50% {
+    height: 10px;
+  }
+  100% {
+    height: 15px;
+  }
+}
+
+@keyframes threeAnimate {
+  50% {
+    height: 25px;
+  }
+  100% {
+    height: 10px;
+  }
+}
