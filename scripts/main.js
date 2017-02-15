@@ -5,6 +5,8 @@ var logicBoolean = false,
     startSound = $("#start-sound")[0],
     topFixedMenu = $('.header');
 
+VK.Widgets.Subscribe("vk_subscribe", {mode: 2, width: 100, height: 50}, 85927952);
+
 $(function () {
     setInterval(function () {
         var heightScreen = window.pageYOffset;
