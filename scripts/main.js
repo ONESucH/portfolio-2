@@ -5,7 +5,7 @@ var logicBoolean = false,
     startSound = $("#start-sound")[0],
     topFixedMenu = $('.header');
 
-VK.Widgets.Subscribe("vk_subscribe", {mode: 2, width: 100, height: 50}, 85927952);
+VK.Widgets.Subscribe("vk_subscribe-block", {mode:2, height:50, width:140}, 85927952);
 
 $(function () {
     setInterval(function () {
@@ -13,6 +13,7 @@ $(function () {
 
         setTimeout(function () {
             var shadowingHeightScreen;
+
             shadowingHeightScreen = heightScreen;
 
             if (shadowingHeightScreen > heightScreen || heightScreen === 0) {
@@ -51,7 +52,7 @@ function rightAnimationButton() {
 
 $('.parallax-window').parallax({imageSrc: './img/content/background-1.jpg'});
 
-animateOffAndPlayMusic();
+//animateOffAndPlayMusic();
 function animateOffAndPlayMusic() {
     offAndPlayMusic = !offAndPlayMusic;
 
