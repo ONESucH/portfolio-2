@@ -50,7 +50,7 @@ function rightAnimationButton() {
     }
 }
 
-$('.parallax-window').parallax({imageSrc: './img/content/background-1.jpg'});
+$('.parallax-window').parallax({imageSrc: './img/background-1.jpg'});
 
 //animateOffAndPlayMusic();
 function animateOffAndPlayMusic() {
@@ -59,6 +59,7 @@ function animateOffAndPlayMusic() {
     if (offAndPlayMusic) {
         startSound.play();
         $('.block-on-off-value').css({'animation': 'borderColor 20s infinite normal ease'});
+        $('.scroll-button i').css({'animation': 'animationColor 20s infinite normal ease'});
         $('.block-on-off-value span:nth-child(1)').css({'animation':'oneAnimate 1s infinite alternate ease'});
         $('.block-on-off-value span:nth-child(2)').css({'animation':'twoAnimate 1s infinite normal ease'});
         $('.block-on-off-value span:nth-child(3)').css({'animation':'threeAnimate 1s infinite normal ease'});
