@@ -1,3 +1,3 @@
 # portfolio-2
 Demo - portfilio
-https://github.com/ONESucH/portfolio-2
+https://onesuch.github.io/portfolio-2/
