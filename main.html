@@ -10,8 +10,8 @@
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="img/rtaImage.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="img/rtaImage.ico">
+    <link rel="shortcut icon" href="img/icon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="img/icon.ico">
     <link rel="apple-touch-icon" sizes="72x72" href="img/icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="img/icon-114x114.png">
 </head>
@@ -26,12 +26,11 @@
     <div class="block-on-off-value" onclick="animateOffAndPlayMusic()"><span></span><span></span><span></span><span></span><span></span></div>
     <ul>
         <li><a href="//github.com/ONESucH">Навыки</a></li>
-        <li><a href="//vk.com/0nesuch07">Связаться</a></li>
+        <li><i class="fa fa-microphone" id="microphone" aria-hidden="true" onclick="speech()"></i>
+            <input type="text" placeholder="ваше слово" id="finalResultVoice" disabled></li>
     </ul>
     <button onclick="rightAnimationButton()" id="clickMusic">
-        <span id="one"></span>
-        <span id="two"></span>
-        <span id="three"></span>
+        <span id="one"></span><span id="two"></span><span id="three"></span>
     </button>
 </div>
 <div class="content">
@@ -39,7 +38,9 @@
         <div class="section-1 parallax-window">
             <h1>Привет</h1>
             <p>Вы находитесь на сайте<i>Lending-page</i><span>Frontend-developer</span></p>
-            <div class="scroll-button"><i class="fa fa-angle-double-down" aria-hidden="true"></i></div>
+            <div class="scroll-button">
+                <a href=".section-2"><i class="fa fa-angle-double-down" aria-hidden="true"></i></a>
+            </div>
         </div>
         <div class="section-2 parallax-window">
             <ul>
@@ -89,6 +90,8 @@
         </div>
         </div>
     </div>
+    <!-- VK Widget -->
+    <div id="vk_community_messages"></div>
 </div>
 <div class="footer">
     <span id="activeUser"></span>

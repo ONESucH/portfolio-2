@@ -1,18 +1,21 @@
 'use strict';
-var logicBoolean = false,
+let logicBoolean = false,
     offAndPlayMusic = false,
     soundLink = $("#sound-link")[0],
     startSound = $("#start-sound")[0],
-    topFixedMenu = $('.header');
+    topFixedMenu = $('.header'),
+    recognizer = new webkitSpeechRecognition();
 
-VK.Widgets.Subscribe("vk_subscribe-block", {mode:2, height:50, width:140}, 85927952);
+/*** Initialization ***/
+recognizer.lang = 'ru-Ru';
+recognizer.interimResults = true;
 
 $(function () {
     setInterval(function () {
-        var heightScreen = window.pageYOffset;
+        let heightScreen = window.pageYOffset;
 
         setTimeout(function () {
-            var shadowingHeightScreen;
+            let shadowingHeightScreen;
 
             shadowingHeightScreen = heightScreen;
 
@@ -26,7 +29,7 @@ $(function () {
 });
 
 function rightAnimationButton() {
-    var rightBlock = $('.right-block'),
+    let rightBlock = $('.right-block'),
         leftBlock = $('.left-block');
 
         $("#clickMusic").click(function() {
@@ -68,5 +71,58 @@ function animateOffAndPlayMusic() {
     } else {
         startSound.pause();
         $('.block-on-off-value span:nth-child(-n+5)').css({'animation-name': 'oneAnimate, twoAnimate,threeAnimate', 'animation-play-state': 'paused'});
+    }
+}
+
+$(document).ready(function () {
+    VK.Widgets.Subscribe("vk_subscribe-block", {mode:2, height:50, width:140}, 85927952);
+    VK.Widgets.CommunityMessages("vk_community_messages", 127607773, {expandTimeout: "10000",tooltipButtonText: "Есть вопрос? Задавайте..."});
+
+    $('.scroll-button').on('click','a', function (event) {
+       event.preventDefault();
+       let elementId  = $(this).attr('href'),
+           elementTop = $(elementId).offset().top;
+
+       $('body,html').animate({scrollTop: elementTop}, 1500);
+   })
+});
+
+/*** Voice analysis ***/
+function speech() {
+    let microphone = $('#microphone'),
+        resultMicrophone = $('#finalResultVoice');
+    microphone.css({'color':'#00cd59'});
+    recognizer.start();
+
+    /** Создаём callback **/
+    recognizer.onresult = function (event) {
+        let result = event.results[event.resultIndex],
+            informationStorage = '';
+
+        if (result.isFinal) {
+            informationStorage = result[0].transcript;
+            setTimeout(function () {
+                resultMicrophone.val('').hide();
+            }, 5000);
+        } else {
+            resultMicrophone.val(informationStorage).show();
+        }
+        switch (informationStorage) {
+            case ('связаться с автором'):
+                console.log('связаться с автором');
+                break;
+            case ('найти автора на карте'):
+                console.log('найти автора на карте');
+                break;
+            case ('найти автора'):
+                window.location.href = '//new.vk.com/0nesuch07';
+                break;
+            default:
+                console.log(result[0].transcript);
+                setTimeout(function () {
+                    microphone.css({'color':'orange'});
+                }, 3000)
+        }
+        resultMicrophone.val(informationStorage);
     }
 }
