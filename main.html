@@ -27,7 +27,7 @@
     <ul>
         <li><a href="//github.com/ONESucH">Навыки</a></li>
         <li><i class="fa fa-microphone" id="microphone" aria-hidden="true" onclick="speech()"></i>
-            <input type="text" placeholder="ваше слово" id="finalResultVoice" disabled></li>
+            <input type="text" placeholder="ваши слова" id="finalResultVoice" disabled></li>
     </ul>
     <button onclick="rightAnimationButton()" id="clickMusic">
         <span id="one"></span><span id="two"></span><span id="three"></span>
@@ -92,6 +92,8 @@
     </div>
     <!-- VK Widget -->
     <div id="vk_community_messages"></div>
+    <!-- Scroll Top -->
+    <div class="scroll-top"><a href=".content"><img src="img/rocket.png" alt="rocket"></a></div>
 </div>
 <div class="footer">
     <span id="activeUser"></span>
@@ -100,9 +102,7 @@
 <style type="text/css">#hellopreloader>p{display:none;}#hellopreloader_preload{display:block;position:fixed;z-index:99999;top:0;left:0;right:0;bottom:0;background:#22313F url(http://hello-site.ru//main/images/preloads/rings.svg) center center no-repeat;background-size:124px;}</style>
 <div id="hellopreloader"><div id="hellopreloader_preload"></div></div>
 <script type="text/javascript">let hellopreloader = document.getElementById("hellopreloader_preload");function fadeOutnojquery(el){el.style.opacity = 1;let interhellopreloader = setInterval(function(){el.style.opacity = el.style.opacity - 0.05;if (el.style.opacity <=0.05){ clearInterval(interhellopreloader);hellopreloader.style.display = "none";}},16);}window.onload = function(){setTimeout(function(){fadeOutnojquery(hellopreloader);},1000);};</script>
-<!--[if lt IE 9]>
-<script src="scripts/scripts.min.js"></script>
-<![endif]-->
+<!--[if lt IE 9]><script src="scripts/scripts.min.js"></script><![endif]-->
 <!-- Load CSS -->
 <script>
     function loadCSS(hf) {let ms=document.createElement("link");

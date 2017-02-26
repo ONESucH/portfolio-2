@@ -82,10 +82,42 @@ $(document).ready(function () {
        event.preventDefault();
        let elementId  = $(this).attr('href'),
            elementTop = $(elementId).offset().top;
-
-       $('body,html').animate({scrollTop: elementTop}, 1500);
-   })
+       $('body,html').animate({scrollTop: elementTop}, 1000);
+   });
+    $('.scroll-top').on('click','a', function (event) {
+        rocketAnimation();
+        event.preventDefault();
+        let elementId  = $(this).attr('href'),
+            elementTop = $(elementId).offset().top;
+        $('body,html').animate({scrollTop: elementTop}, 3000);
+    })
 });
+
+function rocketAnimation() {
+    let rocket = $('.scroll-top'),
+        fireRocket = document.createElement('span'),
+        cloud = document.createElement('div');
+
+    cloud.className = 'cloud-animation';
+    rocket.css({'animation':'topRocket 3s backwards normal ease-in'});
+
+    rocket.append(fireRocket);
+    $('.content').append(cloud);
+
+    setTimeout(function () {
+        $('.scroll-top img').attr("src", "img/starFlash.png");
+    }, 2700);
+
+    setTimeout(function () {
+        fireRocket.remove();
+        $('.scroll-top img').attr("src", "img/rocket.png");
+        rocket.css({'animation':'none'});
+    }, 3000);
+
+    setTimeout(function () {
+        cloud.remove();
+    }, 6000);
+}
 
 /*** Voice analysis ***/
 function speech() {
