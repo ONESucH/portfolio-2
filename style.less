@@ -244,8 +244,8 @@ body {
   background: rgba(0, 0, 0, 0.4);
   ul {
     display: flex;
-    width: 80%;
-    margin: 60vh auto 70px;
+    width: 75%;
+    margin: auto;
     overflow: visible;
   }
   a {
@@ -266,7 +266,6 @@ body {
   img {
     position: relative;
     width: 100%;
-    opacity: 0.5;
     margin: auto;
   }
   h3 {
@@ -296,20 +295,20 @@ body {
     width: 80%;
     color: rgb(0, 0, 0);
     resize: none;
-    text-shadow: rgba(0, 127, 81, 0.91);
+    text-shadow: #00cd59;
     margin: 10px auto;
     padding: 10px 15px;
-    border: 1px solid rgb(0, 127, 81);
+    border: #00cd59;
     outline: none;
     border-radius: 6px;
   }
   button {
     width: 200px;
     color: rgb(0, 0, 0);
-    text-shadow: rgba(0, 127, 81, 0.91);
+    text-shadow: #00cd59;
     margin: 10px auto;
     padding: 10px 15px;
-    border: 1px solid rgb(0, 127, 81);
+    border: 1px solid #00cd59;
     border-radius: 6px;
     cursor: pointer;
   }
@@ -403,6 +402,20 @@ body {
   background: url("img/cloud.png") no-repeat center;
   background-size: cover;
   animation: topCloud 6s backwards normal ease-in;
+}
+
+.message-block {
+  display: none;
+  text-align: center;
+  position: fixed;
+  z-index: 99999;
+  right: 5vh;
+  top: 15vh;
+  width: 160px;
+  color: black;
+  border: 1px solid rgba(0, 0, 0, 0.81);
+  background: orange;
+  border-radius: 4px;
 }
 
 /** Анимация **/

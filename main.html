@@ -74,14 +74,14 @@
     </div>
     <div class="right-block">
         <div class="fixed-block">
-            <form action="">
+            <form id="mail-message">
                 <div class="subscribe">
                     <a href="//vk.com/0nesuch07"><i class="fa fa-vk" aria-hidden="true"></i></a>
                     <a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
                 </div>
                 <h2>Связаться со мной</h2>
-                <input type="text" placeholder="Пример: Олег" required pattern="[a-zA-Z а-яА-Я]{2,20}">
-                <textarea placeholder="Сообщение" required></textarea>
+                <input type="text" name="name" placeholder="Пример: Олег" required pattern="[a-zA-Z а-яА-Я]{2,20}">
+                <textarea name="message" placeholder="Сообщение" required></textarea>
                 <button>Отправить</button>
             </form>
         <div class="subscribe-block">
@@ -90,6 +90,7 @@
         </div>
         </div>
     </div>
+    <div class="message-block"></div>
     <!-- VK Widget -->
     <div id="vk_community_messages"></div>
     <!-- Scroll Top -->
