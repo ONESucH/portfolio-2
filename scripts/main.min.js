@@ -55,7 +55,7 @@ function rightAnimationButton() {
 
 $('.parallax-window').parallax({imageSrc: './img/background-1.jpg'});
 
-//animateOffAndPlayMusic();
+animateOffAndPlayMusic();
 function animateOffAndPlayMusic() {
     offAndPlayMusic = !offAndPlayMusic;
 
@@ -123,8 +123,15 @@ $(document).ready(function () {
             }
         });
     });
+
+    ///** monitoring the scrolls**/
+    //setInterval(function () {
+    //    let monitoringScroll = $('html, body').scrollTop();
+    //    console.log('-->', monitoringScroll);
+    //}, 300);
 });
 
+/** Анимация ракеты **/
 function rocketAnimation() {
     let rocket = $('.scroll-top'),
         fireRocket = document.createElement('span'),
@@ -144,7 +151,7 @@ function rocketAnimation() {
         fireRocket.remove();
         $('.scroll-top img').attr("src", "img/rocket.png");
         rocket.css({'animation':'none'});
-    }, 3000);
+    }, 3050);
 
     setTimeout(function () {
         cloud.remove();
