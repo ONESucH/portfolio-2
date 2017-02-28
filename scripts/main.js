@@ -6,7 +6,7 @@ let logicBoolean = false,
     topFixedMenu = $('.header'),
     recognizer = new webkitSpeechRecognition();
 
-/*** Initialization ***/
+/*** Инициальзация ***/
 recognizer.lang = 'ru-Ru';
 recognizer.interimResults = true;
 
@@ -15,16 +15,25 @@ $(function () {
         let heightScreen = window.pageYOffset;
 
         setTimeout(function () {
-            let shadowingHeightScreen;
-
-            shadowingHeightScreen = heightScreen;
-
-            if (shadowingHeightScreen > heightScreen || heightScreen === 0) {
+            if (heightScreen === 0) {
                 topFixedMenu.css({background:'rgba(0, 0, 0, 1)',padding:'6px auto;'});
             } else {
                 topFixedMenu.css({background:'rgba(0, 0, 0, 0.5)',padding: '4px auto;'});
             }
         }, 350);
+
+        /** Отслежка скроллинга **/
+        if (heightScreen < 400) {
+                $('.scroll-top').fadeOut('slow', function () {
+                    $(this).css({'display': 'none'});
+                })
+        } else {
+            setTimeout(function () {
+                $('.scroll-top').fadeIn('slow', function () {
+                    $(this).css({'display': 'block'});
+                })
+            }, 1000);
+        }
     }, 350)
 });
 
@@ -52,10 +61,12 @@ function rightAnimationButton() {
         $('#three').css({margin:'0 auto', 'border-radius':'0'}).rotate({animateTo: 0});
     }
 }
+/** Паралакс **/
+$('.section-1').parallax({imageSrc: './img/background-1.jpg'});
+$('.section-2').parallax({imageSrc: './img/1.gif'});
 
-$('.parallax-window').parallax({imageSrc: './img/background-1.jpg'});
-
-animateOffAndPlayMusic();
+/** Музыка **/
+//animateOffAndPlayMusic();
 function animateOffAndPlayMusic() {
     offAndPlayMusic = !offAndPlayMusic;
 
@@ -75,6 +86,7 @@ function animateOffAndPlayMusic() {
 }
 
 $(document).ready(function () {
+    /** Виджеты **/
     VK.Widgets.Subscribe("vk_subscribe-block", {mode:2, height:50, width:140}, 85927952);
     VK.Widgets.CommunityMessages("vk_community_messages", 127607773, {expandTimeout: "10000",tooltipButtonText: "Есть вопрос? Задавайте..."});
 
@@ -93,19 +105,19 @@ $(document).ready(function () {
         $('body,html').animate({scrollTop: elementTop}, 3000);
     });
 
-    /** Ajax form **/
+    /** Ajax форма **/
     $("#mail-message").submit(function() {
         let form_data = $(this).serialize(), //собераем все данные из формы
             messageBlock = document.createElement('p'),
             mainBlockMessage = $('.message-block');
 
         $.ajax({
-            type: 'POST',
-            url: 'mail.php',
+            type: "POST",
+            url: "scripts/mail.php",
             data: form_data,
             success: function() {
-                mainBlockMessage.css({'display': 'block'});
-                messageBlock += 'Сообщение отправлено!';
+                mainBlockMessage.css({"display": "block"});
+                messageBlock = "Сообщение отправлено!";
                 mainBlockMessage.append(messageBlock);
                 setTimeout(function () {
                     mainBlockMessage.remove();
@@ -113,22 +125,15 @@ $(document).ready(function () {
                 }, 3000);
             },
             error: function () {
-                mainBlockMessage.css({'display': 'block'});
-                messageBlock += 'Сообщение не отправлено!';
+                mainBlockMessage.css({"display": "block"});
+                messageBlock = "Сообщение не отправлено!";
                 mainBlockMessage.append(messageBlock);
                 setTimeout(function () {
                     mainBlockMessage.remove();
-                    messageBlock.remove();
                 }, 3000);
             }
         });
     });
-
-    ///** monitoring the scrolls**/
-    //setInterval(function () {
-    //    let monitoringScroll = $('html, body').scrollTop();
-    //    console.log('-->', monitoringScroll);
-    //}, 300);
 });
 
 /** Анимация ракеты **/
@@ -158,14 +163,13 @@ function rocketAnimation() {
     }, 6000);
 }
 
-/*** Voice analysis ***/
+/*** Голосовое управление ***/
 function speech() {
     let microphone = $('#microphone'),
         resultMicrophone = $('#finalResultVoice');
     microphone.css({'color':'#00cd59'});
     recognizer.start();
 
-    /** Создаём callback **/
     recognizer.onresult = function (event) {
         let result = event.results[event.resultIndex],
             informationStorage = '';
