@@ -24,7 +24,7 @@ $(function () {
 
         /** Отслежка скроллинга **/
         if (heightScreen < 400) {
-                $('.scroll-top').fadeOut('slow', function () {
+                $('.scroll-top').fadeOut('100', function () {
                     $(this).css({'display': 'none'});
                 })
         } else {
@@ -82,7 +82,7 @@ function animateOffAndPlayMusic() {
         $('.block-on-off-value span:nth-child(5)').css({'animation':'oneAnimate 1s infinite normal ease'});
     } else {
         startSound.pause();
-        $('.block-on-off-value span:nth-child(-n+5)').css({'animation-name': 'oneAnimate, twoAnimate,threeAnimate', 'animation-play-state': 'paused'});
+        $('.block-on-off-value span:nth-child(-n+5)').css({'animation-name':'oneAnimate,twoAnimate,threeAnimate', 'animation-play-state': 'paused'});
     }
 }
 
@@ -157,7 +157,7 @@ function rocketAnimation() {
         fireRocket.remove();
         $('.scroll-top img').attr("src", "img/rocket.png");
         rocket.css({'animation':'none'});
-    }, 3050);
+    }, 3100);
 
     setTimeout(function () {
         cloud.remove();
