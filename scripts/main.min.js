@@ -18,7 +18,7 @@ $(function () {
             if (heightScreen === 0) {
                 topFixedMenu.css({background:'rgba(0, 0, 0, 1)',padding:'6px auto;'});
             } else {
-                topFixedMenu.css({background:'rgba(0, 0, 0, 0.5)',padding: '4px auto;'});
+                topFixedMenu.css({background:'rgba(0, 0, 0, 0.5)',padding:'4px auto;'});
             }
         }, 350);
 
@@ -56,14 +56,15 @@ function rightAnimationButton() {
     } else {
         rightBlock.hide('slow').css({'flex-grow':'0'});
         leftBlock.css({'width':'0'});
-        $('#one').css({margin:'0 auto', 'border-radius':'0'}).rotate({animateTo: 0});
+        $('#one').css({margin:'0 auto','border-radius':'0'}).rotate({animateTo: 0});
         $('#two').fadeIn('2500', function () {$(this).css({'display':'flex', 'margin':'2px auto'});});
-        $('#three').css({margin:'0 auto', 'border-radius':'0'}).rotate({animateTo: 0});
+        $('#three').css({margin:'0 auto','border-radius':'0'}).rotate({animateTo: 0});
     }
 }
+
 /** Паралакс **/
-$('.section-1').parallax({imageSrc: './img/background-1.jpg'});
-$('.section-2').parallax({imageSrc: './img/1.gif'});
+$('.section-1').parallax({imageSrc: './img/night-mac.jpg'});
+$('.section-2').parallax({imageSrc: './img/day-mac.jpg'});
 
 /** Музыка **/
 //animateOffAndPlayMusic();
@@ -90,10 +91,10 @@ $(document).ready(function () {
     VK.Widgets.Subscribe("vk_subscribe-block", {mode:2, height:50, width:140}, 85927952);
     VK.Widgets.CommunityMessages("vk_community_messages", 127607773, {expandTimeout: "10000",tooltipButtonText: "Есть вопрос? Задавайте..."});
 
-    /** Скроллинг до нужного элемента **/
+    /** Скролинг до нужного элемента **/
     $('.scroll-button').on('click','a', function (event) {
        event.preventDefault();
-       let elementId  = $(this).attr('href'),
+       let elementId = $(this).attr('href'),
            elementTop = $(elementId).offset().top;
        $('body,html').animate({scrollTop: elementTop}, 1000);
    });

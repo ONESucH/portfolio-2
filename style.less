@@ -245,35 +245,63 @@ body {
   background: rgba(0, 0, 0, 0.4);
   ul {
     display: flex;
-    width: 70%;
-    margin: 40vh auto;
-    overflow: visible;
+    margin: 60vh auto 0;
+    flex-flow: row;
+    flex-grow: 1;
+    flex-shrink: 5;
+    align-content: center;
+    align-items: stretch;
+    justify-content: center;
   }
   a {
     text-decoration: none;
-    color: #fff;
+    color: black;
   }
   li {
-    flex-flow: row wrap;
-    align-items: stretch;
+    overflow: hidden;
+    flex-grow: 1;
     color: black;
-    width: 30%;
-    padding: 2px;
-    text-align: center;
-    margin: auto;
     list-style: none;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.71);
-  }
-  img {
-    position: relative;
-    width: 100%;
-    margin: auto;
+    cursor: pointer;
+    height: 250px;
+    background-position: center top;
+    background-size: cover;
+    z-index: 10;
+    &:hover {
+      background-size: 100%;
+      &:after {
+        background: rgba(0, 0, 0, .0);
+      }
+    }
+    &:after {
+      content: '';
+      position: relative;
+      display: block;
+      height: 101%;
+      z-index: 11;
+      top: calc(-18%);
+      background: rgba(0,0,0,.5);
+    }
+    &:nth-child(1) {
+      background: url("img/1_s.jpg") no-repeat;
+    }
+    &:nth-child(2) {
+      background: url("img/2_s.jpg") no-repeat;
+    }
+    &:nth-child(3) {
+      background: url("img/3_s.jpg") no-repeat;
+    }
+    &:nth-child(4) {
+      background: url("img/4_s.jpg") no-repeat;
+    }
+    &:nth-child(5) {
+      background: url("img/5_s.jpg") no-repeat;
+    }
   }
   h3 {
-    padding: 15px 0;
-  }
-  p {
-    padding: 15px 0;
+    padding: 15px 5px;
+    color: white;
+    z-index: 15;
   }
 }
 
@@ -431,6 +459,9 @@ body {
   }
 }
 @keyframes topCloud {
+  0% {
+    top: -20vh;
+  }
   50% {
     top: 50px;
   }
