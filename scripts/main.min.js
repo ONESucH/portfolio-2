@@ -67,7 +67,7 @@ $('.section-1').parallax({imageSrc: './img/night-mac.jpg'});
 $('.section-2').parallax({imageSrc: './img/day-mac.jpg'});
 
 /** Музыка **/
-animateOffAndPlayMusic();
+//animateOffAndPlayMusic();
 function animateOffAndPlayMusic() {
     offAndPlayMusic = !offAndPlayMusic;
 
