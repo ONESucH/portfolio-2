@@ -67,7 +67,7 @@ $('.section-1').parallax({imageSrc: './img/night-mac.jpg'});
 $('.section-2').parallax({imageSrc: './img/day-mac.jpg'});
 
 /** Музыка **/
-//animateOffAndPlayMusic();
+animateOffAndPlayMusic();
 function animateOffAndPlayMusic() {
     offAndPlayMusic = !offAndPlayMusic;
 
@@ -108,13 +108,13 @@ $(document).ready(function () {
 
     /** Ajax форма **/
     $("#mail-message").submit(function() {
-        let form_data = $(this).serialize(), //собераем все данные из формы
+        let form_data = $(this).serialize(),
             messageBlock = document.createElement('p'),
             mainBlockMessage = $('.message-block');
 
         $.ajax({
             type: "POST",
-            url: "scripts/mail.php",
+            url: "mail.php",
             data: form_data,
             success: function() {
                 mainBlockMessage.css({"display": "block"});
@@ -168,7 +168,7 @@ function rocketAnimation() {
 function speech() {
     let microphone = $('#microphone'),
         resultMicrophone = $('#finalResultVoice');
-    microphone.css({'color':'#00cd59'});
+    microphone.css({'color':'#7CFC00'});
     recognizer.start();
 
     recognizer.onresult = function (event) {
