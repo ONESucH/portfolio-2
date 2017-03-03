@@ -1,16 +1,40 @@
 'use strict';
 let logicBoolean = false,
     offAndPlayMusic = false,
-    soundLink = $("#sound-link")[0],
-    startSound = $("#start-sound")[0],
+    soundLink = $('#sound-link')[0],
+    startSound = $('#start-sound')[0],
     topFixedMenu = $('.header'),
     recognizer = new webkitSpeechRecognition();
 
-/*** Инициальзация ***/
-recognizer.lang = 'ru-Ru';
-recognizer.interimResults = true;
-
 $(function () {
+    /*** Инициальзация ***/
+    recognizer.lang = 'ru-Ru';
+    recognizer.interimResults = true;
+
+    /** Паралакс **/
+    $('.section-1').parallax({imageSrc: 'img/night-mac.jpg'});
+    $('.section-2').parallax({imageSrc: 'img/day-mac.jpg'});
+
+    /** Виджеты **/
+    VK.Widgets.Subscribe('vk_subscribe-block', {mode:2, height:50, width:140}, 85927952);
+    VK.Widgets.CommunityMessages('vk_community_messages', 127607773, {expandTimeout: '10000',tooltipButtonText: 'Есть вопрос? Задавайте...'});
+
+    /** Скролинг до нужного элемента **/
+    $('.scroll-button').on('click','a', function (event) {
+        event.preventDefault();
+        let elementId = $(this).attr('href'),
+            elementTop = $(elementId).offset().top;
+        $('body,html').animate({scrollTop: elementTop}, 1000);
+    });
+    $('.scroll-top').on('click','a', function (event) {
+        rocketAnimation();
+        event.preventDefault();
+        let elementId  = $(this).attr('href'),
+            elementTop = $(elementId).offset().top;
+        $('body,html').animate({scrollTop: elementTop}, 3000);
+    });
+
+    /** Фон Header **/
     setInterval(function () {
         let heightScreen = window.pageYOffset;
 
@@ -41,7 +65,7 @@ function rightAnimationButton() {
     let rightBlock = $('.right-block'),
         leftBlock = $('.left-block');
 
-        $("#clickMusic").click(function() {
+        $('#clickMusic').click(function() {
             soundLink.play();
         });
 
@@ -61,10 +85,6 @@ function rightAnimationButton() {
         $('#three').css({margin:'0 auto','border-radius':'0'}).rotate({animateTo: 0});
     }
 }
-
-/** Паралакс **/
-$('.section-1').parallax({imageSrc: './img/night-mac.jpg'});
-$('.section-2').parallax({imageSrc: './img/day-mac.jpg'});
 
 /** Музыка **/
 //animateOffAndPlayMusic();
@@ -86,55 +106,34 @@ function animateOffAndPlayMusic() {
     }
 }
 
-$(document).ready(function () {
-    /** Виджеты **/
-    VK.Widgets.Subscribe("vk_subscribe-block", {mode:2, height:50, width:140}, 85927952);
-    VK.Widgets.CommunityMessages("vk_community_messages", 127607773, {expandTimeout: "10000",tooltipButtonText: "Есть вопрос? Задавайте..."});
+/** Ajax форма **/
+$('#mail-message').submit(function() {
+    let form_data = $(this).serialize(),
+        messageBlock = document.createElement('div');
 
-    /** Скролинг до нужного элемента **/
-    $('.scroll-button').on('click','a', function (event) {
-       event.preventDefault();
-       let elementId = $(this).attr('href'),
-           elementTop = $(elementId).offset().top;
-       $('body,html').animate({scrollTop: elementTop}, 1000);
-   });
-    $('.scroll-top').on('click','a', function (event) {
-        rocketAnimation();
-        event.preventDefault();
-        let elementId  = $(this).attr('href'),
-            elementTop = $(elementId).offset().top;
-        $('body,html').animate({scrollTop: elementTop}, 3000);
+    messageBlock.className = 'message-block';
+
+    $.ajax({
+        type: 'POST',
+        url: 'mail.php',
+        data: form_data,
+        success: function() {
+            messageBlock.style.display = 'block';
+            messageBlock.innerHTML = '<p>Сообщение отправлено</p>';
+        },
+        error: function () {
+            messageBlock.style.display = 'block';
+            messageBlock.innerHTML = '<p>Ошибка</p>';
+        }
     });
-
-    /** Ajax форма **/
-    $("#mail-message").submit(function() {
-        let form_data = $(this).serialize(),
-            messageBlock = document.createElement('p'),
-            mainBlockMessage = $('.message-block');
-
-        $.ajax({
-            type: "POST",
-            url: "mail.php",
-            data: form_data,
-            success: function() {
-                mainBlockMessage.css({"display": "block"});
-                messageBlock = "Сообщение отправлено!";
-                mainBlockMessage.append(messageBlock);
-                setTimeout(function () {
-                    mainBlockMessage.remove();
-                    messageBlock.remove();
-                }, 3000);
-            },
-            error: function () {
-                mainBlockMessage.css({"display": "block"});
-                messageBlock = "Сообщение не отправлено!";
-                mainBlockMessage.append(messageBlock);
-                setTimeout(function () {
-                    mainBlockMessage.remove();
-                }, 3000);
-            }
-        });
-    });
+    setTimeout(function() {
+        messageBlock.style.opacity = '.2';
+    }, 4000);
+    setTimeout(function() {
+        messageBlock.remove()
+    }, 5000);
+    $('.all-message-block').append(messageBlock);
+   // $('.left-block');
 });
 
 /** Анимация ракеты **/
@@ -150,12 +149,12 @@ function rocketAnimation() {
     $('.content').append(cloud);
 
     setTimeout(function () {
-        $('.scroll-top img').attr("src", "img/starFlash.png");
+        $('.scroll-top img').attr('src', 'img/starFlash.png');
     }, 2700);
 
     setTimeout(function () {
         fireRocket.remove();
-        $('.scroll-top img').attr("src", "img/rocket.png");
+        $('.scroll-top img').attr('src', 'img/rocket.png');
         rocket.css({'animation':'none'});
     }, 3100);
 
@@ -168,6 +167,7 @@ function rocketAnimation() {
 function speech() {
     let microphone = $('#microphone'),
         resultMicrophone = $('#finalResultVoice');
+
     microphone.css({'color':'#7CFC00'});
     recognizer.start();
 
@@ -187,11 +187,20 @@ function speech() {
             case ('найти автора'):
                 window.location.href = '//new.vk.com/0nesuch07';
                 break;
+            case ('Отправить сообщение'):
+                if (!logicBoolean) {
+                    rightAnimationButton();
+                } else {
+                    return false;
+                }
+                break;
             default:
                 console.log(result[0].transcript);
+                resultMicrophone.val('Команда не найдена');
                 setTimeout(function () {
                     microphone.css({'color':'orange'});
-                }, 3000)
+                }, 3000);
+            resultMicrophone.val(result[0].transcript);
         }
         resultMicrophone.val(informationStorage);
     }
