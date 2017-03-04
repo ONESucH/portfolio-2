@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 
 if((isset($_POST['user_name'])&&$_POST['user_name']!="")&&(isset($_POST['user_message'])&&$_POST['user_message']!="")){

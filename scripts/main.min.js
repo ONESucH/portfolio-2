@@ -114,12 +114,17 @@ $('#mail-message').submit(function() {
     messageBlock.className = 'message-block';
 
     $.ajax({
-        type: 'POST',
         url: 'mail.php',
+        type: 'GET',
         data: form_data,
+        async: true,
         success: function() {
             messageBlock.style.display = 'block';
             messageBlock.innerHTML = '<p>Сообщение отправлено</p>';
+            setTimeout(function () {
+                $('#user_name').val('');
+                $('#user_message').val('');
+            }, 500)
         },
         error: function () {
             messageBlock.style.display = 'block';
@@ -133,7 +138,7 @@ $('#mail-message').submit(function() {
         messageBlock.remove()
     }, 5000);
     $('.all-message-block').append(messageBlock);
-   // $('.left-block');
+    $('.right-block').style.width = '0';
 });
 
 /** Анимация ракеты **/
@@ -168,7 +173,7 @@ function speech() {
     let microphone = $('#microphone'),
         resultMicrophone = $('#finalResultVoice');
 
-    microphone.css({'color':'#7CFC00'});
+    microphone.css({'color':'#7cfc00'});
     recognizer.start();
 
     recognizer.onresult = function (event) {
