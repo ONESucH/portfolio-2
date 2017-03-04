@@ -138,7 +138,7 @@ $('#mail-message').submit(function() {
         messageBlock.remove()
     }, 5000);
     $('.all-message-block').append(messageBlock);
-    $('.right-block').style.width = '0';
+    rightAnimationButton();
 });
 
 /** Анимация ракеты **/
