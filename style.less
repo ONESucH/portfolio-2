@@ -19,10 +19,11 @@
 /** Переменные **/
 @color_1: lawngreen;
 @color_2: #e75200;
-@color_3: orange;
+@color_3: #ffa500;
 @color_4: white;
-@color_5: #000;
+@color_5: rgb(0, 0, 0);
 @color_6: #ff300d;
+@color_7: rgba(255, 144, 0, 0.71);
 /** Стили **/
 * {
   margin: 0;
@@ -42,7 +43,7 @@ body {
   right: 0;
   z-index: 9999;
   display: flex;
-  min-width: 410px;
+  min-width: 470px;
   padding: 4px 8%;
   ul {
     display: flex;
@@ -71,6 +72,19 @@ body {
   }
   a {
     color: @color_4;
+    &:hover:after {
+      width: 100%;
+    }
+    &:after {
+      content: '';
+      position: relative;
+      display: block;
+      cursor: pointer;
+      width: 0;
+      transition: 2s;
+      height: 3px;
+      background: @color_1;
+    }
   }
   input {
     display: none;
@@ -157,7 +171,7 @@ body {
   display: flex;
   align-items: center;
   padding-top: 60px;
-  min-width: 410px;
+  min-width: 470px;
 }
 
 .left-block {
@@ -459,7 +473,7 @@ body {
   display: flex;
   justify-content: center;
   height: 30px;
-  min-width: 410px;
+  min-width: 470px;
 }
 
 .scroll-top {
@@ -542,7 +556,8 @@ body {
   position: relative;
   text-transform: uppercase;
   padding: 6px 4px;
-  box-shadow: 0 0 10px 0 @color_6;
+  margin: 4px auto;
+  box-shadow: 0 0 10px 0 @color_1;
   color: @color_5;
   border: 1px solid rgba(0, 0, 0, 0.80);
   background: @color_3;
@@ -552,7 +567,63 @@ body {
   transition: 6s;
 }
 
+.block-team-management {
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  padding: 6px 4px;
+  margin: 4px auto;
+  box-shadow: 0 0 10px 0 @color_1;
+  color: @color_5;
+  border: 1px solid rgba(0, 0, 0, 0.80);
+  background: @color_7;
+  border-radius: 4px;
+  font-size: 12px;
+  opacity: 1;
+  transition: 6s;
+  a {
+    display: block;
+    text-transform: capitalize;
+    clear: both;
+    margin: 4px auto;
+    &:after, &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 14px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: @color_5;
+    }
+    &:after {
+      animation: messageBlockAfter 5s infinite linear;
+    }
+    &:before {
+      animation: messageBlockBefore 5s infinite linear;
+    }
+  }
+}
+
 /** Анимация **/
+@keyframes messageBlockAfter {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: 0;
+    left: calc(100%);
+  }
+}
+@keyframes messageBlockBefore {
+  0% {
+    bottom: 0;
+  }
+  100% {
+    bottom: 0;
+    left: calc(100%);
+  }
+}
 @keyframes topRocket {
   20% {
     bottom: 100px;

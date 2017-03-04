@@ -6,34 +6,32 @@ let logicBoolean = false,
     topFixedMenu = $('.header'),
     recognizer = new webkitSpeechRecognition();
 
+/*** Проверка ширины браузера ***/
+$(function() {
+    let widthWindowBrowser = innerWidth,
+        blockTeamManagement = document.createElement('div');
+
+    if (widthWindowBrowser < 650) {
+        blockTeamManagement.remove();
+    } else {
+        blockTeamManagement.className = 'block-team-management';
+        blockTeamManagement.innerHTML = '<a>Голосовые команды</a>';
+        setInterval(function () {
+            let arr = ['отправить сообщение', 'найти автора'],
+                rand = Math.floor(Math.random() * arr.length),
+                arrTextResult = document.createElement('p');
+
+            arrTextResult.innerText = arr[rand];
+            setInterval(function () {
+                arrTextResult.innerText = '';
+            }, 2495);
+            blockTeamManagement.append(arrTextResult);
+        },2500);
+        $('.all-message-block').append(blockTeamManagement);
+    }
+});
+
 $(function () {
-    /*** Инициальзация ***/
-    recognizer.lang = 'ru-Ru';
-    recognizer.interimResults = true;
-
-    /** Паралакс **/
-    $('.section-1').parallax({imageSrc: 'img/night-mac.jpg'});
-    $('.section-2').parallax({imageSrc: 'img/day-mac.jpg'});
-
-    /** Виджеты **/
-    VK.Widgets.Subscribe('vk_subscribe-block', {mode:2, height:50, width:140}, 85927952);
-    VK.Widgets.CommunityMessages('vk_community_messages', 127607773, {expandTimeout: '10000',tooltipButtonText: 'Есть вопрос? Задавайте...'});
-
-    /** Скролинг до нужного элемента **/
-    $('.scroll-button').on('click','a', function (event) {
-        event.preventDefault();
-        let elementId = $(this).attr('href'),
-            elementTop = $(elementId).offset().top;
-        $('body,html').animate({scrollTop: elementTop}, 1000);
-    });
-    $('.scroll-top').on('click','a', function (event) {
-        rocketAnimation();
-        event.preventDefault();
-        let elementId  = $(this).attr('href'),
-            elementTop = $(elementId).offset().top;
-        $('body,html').animate({scrollTop: elementTop}, 3000);
-    });
-
     /** Фон Header **/
     setInterval(function () {
         let heightScreen = window.pageYOffset;
@@ -61,6 +59,34 @@ $(function () {
     }, 350)
 });
 
+/*** Инициальзация ***/
+recognizer.lang = 'ru-Ru';
+recognizer.interimResults = true;
+
+/** Паралакс **/
+$('.section-1').parallax({imageSrc: 'img/night-mac.jpg'});
+$('.section-2').parallax({imageSrc: 'img/day-mac.jpg'});
+
+/** Виджеты **/
+VK.Widgets.Subscribe('vk_subscribe-block', {mode:2, height:50, width:140}, 85927952);
+VK.Widgets.CommunityMessages('vk_community_messages', 127607773, {expandTimeout: '10000',tooltipButtonText: 'Есть вопрос? Задавайте...'});
+
+/** Скролинг до нужного элемента **/
+$('.scroll-button').on('click','a', function (event) {
+    event.preventDefault();
+    let elementId = $(this).attr('href'),
+        elementTop = $(elementId).offset().top;
+    $('body,html').animate({scrollTop: elementTop}, 1000);
+});
+$('.scroll-top').on('click','a', function (event) {
+    rocketAnimation();
+    event.preventDefault();
+    let elementId  = $(this).attr('href'),
+        elementTop = $(elementId).offset().top;
+    $('body,html').animate({scrollTop: elementTop}, 3000);
+});
+
+/** Выдвигающиеся блоки **/
 function rightAnimationButton() {
     let rightBlock = $('.right-block'),
         leftBlock = $('.left-block');
