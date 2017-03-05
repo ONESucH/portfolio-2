@@ -3,8 +3,7 @@ let logicBoolean = false,
     offAndPlayMusic = false,
     soundLink = $('#sound-link')[0],
     startSound = $('#start-sound')[0],
-    topFixedMenu = $('.header'),
-    recognizer = new webkitSpeechRecognition();
+    topFixedMenu = $('.header');
 
 /*** Проверка ширины браузера ***/
 $(function() {
@@ -58,10 +57,6 @@ $(function () {
         }
     }, 350)
 });
-
-/*** Инициальзация ***/
-recognizer.lang = 'ru-Ru';
-recognizer.interimResults = true;
 
 /** Паралакс **/
 $('.section-1').parallax({imageSrc: 'img/night-mac.jpg'});
@@ -181,47 +176,63 @@ function rocketAnimation() {
 }
 
 /*** Голосовое управление ***/
-function speech() {
-    let microphone = $('#microphone'),
-        resultMicrophone = $('#finalResultVoice');
+function speech(trueClick) {
+    let browser = navigator.userAgent;
 
-    microphone.css({'color':'#7cfc00'});
-    recognizer.start();
+    if (browser.search(/Chrome/) != -1 || browser.search(/Opera/) != -1) {
+        /*** Инициальзация голосовых модулей ***/
+        let recognizer = new webkitSpeechRecognition();
 
-    recognizer.onresult = function (event) {
-        let result = event.results[event.resultIndex],
-            informationStorage = '';
+        recognizer.lang = 'ru-Ru';
+        recognizer.interimResults = true;
 
-        if (result.isFinal) {
-            informationStorage = result[0].transcript;
-            setTimeout(function () {
-                resultMicrophone.val('').hide();
-            }, 5000);
-        } else {
-            resultMicrophone.val(informationStorage).show();
-        }
-        switch (informationStorage) {
-            case ('найти автора'):
-                window.location.href = '//new.vk.com/0nesuch07';
-                break;
-            case ('Отправить сообщение'):
-                if (!logicBoolean) {
-                    rightAnimationButton();
+        if (trueClick) {
+            let microphone = $('#microphone'),
+                resultMicrophone = $('#finalResultVoice');
+
+            microphone.css({'color':'#7cfc00'});
+            recognizer.start();
+
+            recognizer.onresult = function (event) {
+                let result = event.results[event.resultIndex],
+                    informationStorage = '';
+
+                if (result.isFinal) {
+                    informationStorage = result[0].transcript;
+                    setTimeout(function () {
+                        resultMicrophone.val('').hide();
+                    }, 5000);
                 } else {
-                    return false;
+                    resultMicrophone.val(informationStorage).show();
                 }
-                break;
-            default:
-                console.log(result[0].transcript);
-                resultMicrophone.val('Команда не найдена');
-                setTimeout(function () {
-                    microphone.css({'color':'orange'});
-                }, 3000);
-            resultMicrophone.val(result[0].transcript);
+                switch (informationStorage) {
+                    case ('найти автора'):
+                        window.location.href = '//new.vk.com/0nesuch07';
+                        break;
+                    case ('Отправить сообщение'):
+                        if (!logicBoolean) {
+                            rightAnimationButton();
+                        } else {
+                            return false;
+                        }
+                        break;
+                    default:
+                        console.log(result[0].transcript);
+                        resultMicrophone.val('Команда не найдена');
+                        setTimeout(function () {
+                            microphone.css({'color':'orange'});
+                        }, 3000);
+                        resultMicrophone.val(result[0].transcript);
+                }
+                resultMicrophone.val(informationStorage);
+            }
         }
-        resultMicrophone.val(informationStorage);
+    } else {
+        alert('Голосовое управление это DEMO разработка и работает только в Chrome и Opera');
+        return false;
     }
 }
+
 /** Узнаем Браузер пользователя и систему **/
 $(document).ready(function () {
     let BrowserDetect = {
@@ -323,11 +334,6 @@ $(document).ready(function () {
                 identity: 'Linux'}
         ],
     };
-    if (BrowserDetect) {
-        console.log('Chrome')
-    } else {
-        console.log('No Chrome');
-    }
 BrowserDetect.init();
 document.getElementById('name').innerHTML = BrowserDetect.browser;
 document.getElementById('version').innerHTML = BrowserDetect.version;

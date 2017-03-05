@@ -474,7 +474,16 @@ body {
   justify-content: space-around;
   align-items: center;
   flex-flow: row wrap;
+  padding: 10px;
   min-width: 470px;
+}
+
+.mac {
+  border-radius: 10px;
+  width: 250px;
+  background: url("img/monitor_mac.png") no-repeat top center;
+  background-size: 100% 100%;
+  padding: 10px 20px;
   ul {
     align-content: space-between;
     padding-bottom: 50px;
@@ -493,18 +502,50 @@ body {
   }
 }
 
-.mac {
-  border-radius: 10px;
-  width: 250px;
-  background: url("img/monitor_mac.png") no-repeat top center;
-  background-size: 100% 100%;
-  padding: 10px 20px;
-}
-
 .skills {
   width: 500px;
   background: @color_4;
   padding: 10px 15px;
+  ul {
+    list-style: none;
+    margin: 10px auto;
+  }
+  li {
+    text-align: left;
+    text-transform: capitalize;
+  }
+  h6 {
+    text-align: center;
+    font-weight: 900;
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  p {
+    text-transform: uppercase;
+    font-weight: 600;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 13px;
+  }
+  a {
+    display: inline-block;
+    text-transform: uppercase;
+    color: @color_3;
+    &:hover:after {
+      width: 100%;
+    }
+    &:after {
+      content: '';
+      position: relative;
+      display: block;
+      cursor: pointer;
+      width: 0;
+      transition: 2s;
+      height: 3px;
+      background: @color_5;
+    }
+  }
 }
 
 .scroll-top {
