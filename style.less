@@ -169,21 +169,24 @@ body {
 
 .content {
   display: flex;
-  align-items: center;
   padding-top: 60px;
   min-width: 470px;
+  justify-content: center;
+  align-items: stretch;
+  flex-flow: row wrap;
 }
 
 .left-block {
-  width: 100%;
   justify-content: center;
+  width: 100%;
+  transition: 1s;
 }
 
 .right-block {
-  display: none;
   align-self: flex-start;
-  min-height: 100vh;
   z-index: 999;
+  width: 0;
+  transition: 1s;
 }
 
 .subscribe-block {
@@ -404,7 +407,7 @@ body {
 }
 
 .fixed-block {
-  display: initial;
+  display: inherit;
   position: fixed;
   overflow: hidden;
   text-align: center;
@@ -503,9 +506,13 @@ body {
 }
 
 .skills {
-  width: 500px;
+  display: none;
+  overflow: hidden;
+  width: 0;
   background: @color_4;
   padding: 10px 15px;
+  transition: 2s;
+  cursor: pointer;
   ul {
     list-style: none;
     margin: 10px auto;
@@ -527,6 +534,24 @@ body {
     white-space: pre-wrap;
     word-wrap: break-word;
     font-size: 13px;
+  }
+  span {
+    display: inline-block;
+    margin: auto 5px;
+    color: @color_6;
+    &:hover:after {
+      width: 100%;
+    }
+    &:after {
+      content: '';
+      position: relative;
+      display: block;
+      cursor: pointer;
+      width: 0;
+      transition: 2s;
+      height: 3px;
+      background: @color_5;
+    }
   }
   a {
     display: inline-block;

@@ -5,6 +5,7 @@ let logicBoolean = false,
     startSound = $('#start-sound')[0],
     topFixedMenu = $('.header');
 
+
 /*** Проверка ширины браузера ***/
 $(function() {
     let widthWindowBrowser = innerWidth,
@@ -28,6 +29,24 @@ $(function() {
         },2500);
         $('.all-message-block').append(blockTeamManagement);
     }
+});
+
+/** Плавное появление текста **/
+$(document).ready(function () {
+    setInterval(function () {
+        let mainBlock = $('.footer').offset().top,
+            heightWindow = window.pageYOffset;
+
+        if (heightWindow + 2000 >= mainBlock) {
+            $('.skills').fadeIn('2000', function () {
+                $(this).css({'display':'block', 'width':'500px'});
+            });
+        } else {
+            $('.skills').fadeOut('2000', function () {
+                $(this).css({'display':'none', 'width':'0'});
+            });
+        }
+    }, 1600)
 });
 
 $(function () {
@@ -80,24 +99,26 @@ function rightAnimationButton() {
     let rightBlock = $('.right-block'),
         leftBlock = $('.left-block');
 
-        $('#clickMusic').click(function() {
-            soundLink.play();
-        });
+    $('#clickMusic').click(function() {
+        soundLink.play();
+    });
 
-        logicBoolean = !logicBoolean;
+    logicBoolean = !logicBoolean;
 
     if (logicBoolean) {
-        leftBlock.css({'flex-grow':'1','width': '55%'});
-        rightBlock.show('slow').css({'display':'inherit','flex-grow':'2.5','width': '45%'});
+        leftBlock.css({'width':'65%'});
+        rightBlock.css({'width':'35%'}).show('2000');
         $('#one').css({margin:'-3px auto','border-radius':'100%'}).rotate({animateTo: 235});
-        $('#two').css({'display':'none'});
+        $('#two').hide();
         $('#three').css({margin:'-3px auto','border-radius':'100%'}).rotate({animateTo: 305});
+        console.log(logicBoolean, 'Открыта');
     } else {
-        rightBlock.hide('slow').css({'flex-grow':'0'});
-        leftBlock.css({'width':'0'});
+        leftBlock.css({'width':'100%'});
+        rightBlock.css({'width':'0'}).hide('2000');
         $('#one').css({margin:'0 auto','border-radius':'0'}).rotate({animateTo: 0});
-        $('#two').fadeIn('2500', function () {$(this).css({'display':'flex', 'margin':'2px auto'});});
+        $('#two').show();
         $('#three').css({margin:'0 auto','border-radius':'0'}).rotate({animateTo: 0});
+        console.log(logicBoolean, 'Закрыта');
     }
 }
 
