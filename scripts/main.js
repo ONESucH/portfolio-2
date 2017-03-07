@@ -5,7 +5,6 @@ let logicBoolean = false,
     startSound = $('#start-sound')[0],
     topFixedMenu = $('.header');
 
-
 /*** Проверка ширины браузера ***/
 $(function() {
     let widthWindowBrowser = innerWidth,
@@ -17,7 +16,7 @@ $(function() {
         blockTeamManagement.className = 'block-team-management';
         blockTeamManagement.innerHTML = '<a>Голосовые команды</a>';
         setInterval(function () {
-            let arr = ['отправить сообщение', 'найти автора'],
+            let arr = ['отправить сообщение', 'найти автора', 'узнать статистику', 'посмотреть работы'],
                 rand = Math.floor(Math.random() * arr.length),
                 arrTextResult = document.createElement('p');
 
@@ -31,7 +30,7 @@ $(function() {
     }
 });
 
-/** Плавное появление текста **/
+/** Плавное появление блока с текстом **/
 $(document).ready(function () {
     setInterval(function () {
         let mainBlock = $('.footer').offset().top,
@@ -46,7 +45,23 @@ $(document).ready(function () {
                 $(this).css({'display':'none', 'width':'0'});
             });
         }
-    }, 1600)
+    }, 1600);
+
+    $.getJSON('//freegeoip.net/json/?callback=?', function(data) {
+        let dataUsers = JSON.stringify(data, null, 2);
+        $.ajax({
+            url: 'scripts/dataUsers.php',
+            type: 'GET',
+            data: dataUsers,
+            async: false,
+            success: function(dataUsers) {
+                console.log('Получено', dataUsers);
+            },
+            error: function (dataUsers) {
+                console.log('Не получено', dataUsers);
+            }
+        });
+    });
 });
 
 $(function () {
@@ -83,7 +98,7 @@ $('.section-2').parallax({imageSrc: 'img/day-mac.jpg'});
 
 /** Виджеты **/
 VK.Widgets.Subscribe('vk_subscribe-block', {mode:2, height:50, width:140}, 85927952);
-VK.Widgets.CommunityMessages('vk_community_messages', 127607773, {expandTimeout: '20000',tooltipButtonText: 'Есть вопрос? Задавайте...'});
+VK.Widgets.CommunityMessages('vk_community_messages', 127607773, {expandTimeout: '40000',tooltipButtonText: 'Есть вопрос? Задавайте...'});
 
 /** Скролинг до нужного элемента **/
 $('.scroll-button').on('click', function () {
@@ -102,7 +117,6 @@ function rightAnimationButton() {
     $('#clickMusic').click(function() {
         soundLink.play();
     });
-
 
     if (!logicBoolean) {
         leftBlock.css({'width':'65%'});
@@ -153,10 +167,10 @@ $('#mail-message').submit(function() {
     messageBlock.className = 'message-block';
 
     $.ajax({
-        url: 'mail.php',
-        type: 'POST',
+        url: 'scripts/mail.php',
+        type: 'GET',
         data: form_data,
-        async: true,
+        async: false,
         success: function() {
             messageBlock.style.display = 'block';
             messageBlock.innerHTML = '<p>Сообщение отправлено</p>';
@@ -234,6 +248,12 @@ function speech(trueClick) {
                 switch (informationStorage) {
                     case ('найти автора'):
                         window.location.href = '//new.vk.com/0nesuch07';
+                        break;
+                    case ('узнать статистику'):
+                        window.location.href = '//github.com/ONESucH';
+                        break;
+                    case ('посмотреть работы'):
+                        window.location.href = '//github.com/ONESucH?tab=repositories';
                         break;
                     case ('Отправить сообщение'):
                         if (!logicBoolean) {
