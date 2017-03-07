@@ -103,22 +103,25 @@ function rightAnimationButton() {
         soundLink.play();
     });
 
-    logicBoolean = !logicBoolean;
 
-    if (logicBoolean) {
+    if (!logicBoolean) {
         leftBlock.css({'width':'65%'});
         rightBlock.css({'width':'35%'}).show('2000');
         $('#one').css({margin:'-3px auto','border-radius':'100%'}).rotate({animateTo: 235});
         $('#two').hide();
         $('#three').css({margin:'-3px auto','border-radius':'100%'}).rotate({animateTo: 305});
-        console.log(logicBoolean, 'Открыта');
+        return setTimeout(function () {
+            logicBoolean = true;
+        }, 1100);
     } else {
         leftBlock.css({'width':'100%'});
         rightBlock.css({'width':'0'}).hide('2000');
         $('#one').css({margin:'0 auto','border-radius':'0'}).rotate({animateTo: 0});
         $('#two').show();
         $('#three').css({margin:'0 auto','border-radius':'0'}).rotate({animateTo: 0});
-        console.log(logicBoolean, 'Закрыта');
+        return setTimeout(function () {
+            logicBoolean = false;
+        }, 1100);
     }
 }
 
@@ -151,20 +154,22 @@ $('#mail-message').submit(function() {
 
     $.ajax({
         url: 'mail.php',
-        type: 'GET',
+        type: 'POST',
         data: form_data,
         async: true,
         success: function() {
             messageBlock.style.display = 'block';
             messageBlock.innerHTML = '<p>Сообщение отправлено</p>';
             setTimeout(function () {
-                $('#user_name').val('');
-                $('#user_message').val('');
+                $('#user_name, #user_message').val('');
             }, 500)
         },
         error: function () {
             messageBlock.style.display = 'block';
-            messageBlock.innerHTML = '<p>Ошибка</p>';
+            messageBlock.innerHTML = '<p>Ошибка при отправке</p>';
+            setTimeout(function () {
+                $('#user_name, #user_message').val('');
+            }, 30000)
         }
     });
     setTimeout(function() {
