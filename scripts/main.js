@@ -30,40 +30,6 @@ $(function() {
     }
 });
 
-/** Плавное появление блока с текстом **/
-$(document).ready(function () {
-    setInterval(function () {
-        let mainBlock = $('.footer').offset().top,
-            heightWindow = window.pageYOffset;
-
-        if (heightWindow + 2000 >= mainBlock) {
-            $('.skills').fadeIn('2000', function () {
-                $(this).css({'display':'block', 'width':'500px'});
-            });
-        } else {
-            $('.skills').fadeOut('2000', function () {
-                $(this).css({'display':'none', 'width':'0'});
-            });
-        }
-    }, 1600);
-
-    $.getJSON('//freegeoip.net/json/?callback=?', function(data) {
-        let dataUsers = JSON.stringify(data, null, 2);
-        $.ajax({
-            url: 'scripts/dataUsers.php',
-            type: 'GET',
-            data: dataUsers,
-            async: false,
-            success: function(dataUsers) {
-                console.log('Получено', dataUsers);
-            },
-            error: function (dataUsers) {
-                console.log('Не получено', dataUsers);
-            }
-        });
-    });
-});
-
 $(function () {
     /** Фон Header **/
     setInterval(function () {
@@ -89,7 +55,23 @@ $(function () {
                 })
             }, 1000);
         }
-    }, 350)
+    }, 1000);
+
+    /** Информация о пользователе **/
+    setTimeout(function () {
+        $.getJSON('//freegeoip.net/json/?callback=?', function(data) {
+            let dataUsers = JSON.stringify(data, null, 2);
+
+            $.ajax({
+                url: 'scripts/dataUsers.php',
+                type: 'POST',
+                data: 'locationUsers=' + dataUsers,
+                error: function () {
+                    console.log('Не получено');
+                }
+            });
+        });
+    }, 5000)
 });
 
 /** Паралакс **/
@@ -140,7 +122,7 @@ function rightAnimationButton() {
 }
 
 /** Музыка **/
-//animateOffAndPlayMusic();
+animateOffAndPlayMusic();
 function animateOffAndPlayMusic() {
     offAndPlayMusic = !offAndPlayMusic;
 
@@ -168,9 +150,8 @@ $('#mail-message').submit(function() {
 
     $.ajax({
         url: 'scripts/mail.php',
-        type: 'GET',
+        type: 'POST',
         data: form_data,
-        async: false,
         success: function() {
             messageBlock.style.display = 'block';
             messageBlock.innerHTML = '<p>Сообщение отправлено</p>';
