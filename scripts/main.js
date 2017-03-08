@@ -122,7 +122,7 @@ function rightAnimationButton() {
 }
 
 /** Музыка **/
-animateOffAndPlayMusic();
+//animateOffAndPlayMusic();
 function animateOffAndPlayMusic() {
     offAndPlayMusic = !offAndPlayMusic;
 
@@ -162,6 +162,7 @@ $('#mail-message').submit(function() {
         error: function () {
             messageBlock.style.display = 'block';
             messageBlock.innerHTML = '<p>Ошибка при отправке</p>';
+            console.log('Не получено');
             setTimeout(function () {
                 $('#user_name, #user_message').val('');
             }, 30000)
@@ -200,7 +201,7 @@ function rocketAnimation() {
 function speech(trueClick) {
     let browser = navigator.userAgent;
 
-    if (browser.search(/Chrome/) != -1 || browser.search(/Opera/) != -1) {
+    if (browser.search(/Chrome/) != -1) {
         /*** Инициальзация голосовых модулей ***/
         let recognizer = new webkitSpeechRecognition();
 
@@ -255,7 +256,7 @@ function speech(trueClick) {
             }
         }
     } else {
-        alert('Голосовое управление это DEMO разработка и работает только в Chrome и Opera');
+        alert('Голосовое управление это DEMO разработка и работает только в Chrome');
         return false;
     }
 }
